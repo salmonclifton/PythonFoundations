@@ -9,7 +9,7 @@ answer3 = input("Question3?")
 
 #Create a function to create and output the sentence
 def sentence_maker(p1,p2,p3):
-    print("This is how it works {} {} {}".format(answer1 + answer2 + answer3))
+    print("This is how it works {} {} {}".format(answer1, answer2, answer3))
 
 sentence_maker(answer1, answer2, answer3)
 
