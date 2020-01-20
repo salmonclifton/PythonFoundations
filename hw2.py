@@ -34,8 +34,6 @@ def customer_data():
     car_model = input("Enter the model of the car: ")
     sales_price = float(input("Enter purchase price in dollars as 55000.99: "))
     taxes = (tax_rate * sales_price)
-
-
     return(first_name, last_name, phone, car_make, car_model, sales_price, taxes )
 
 #Create function to calculate the total cost
