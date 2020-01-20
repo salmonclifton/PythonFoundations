@@ -21,6 +21,7 @@ Print out the information to the screen, with the same line breaks as shown in t
 tax_rate = 0.101
 licensing_fee = 498.89
 dealer_fee = 4999.99
+
 #Create function to gather user input and return the values
 def customer_data():
     first_name = input("Enter first name: ")
