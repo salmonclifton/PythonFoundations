@@ -13,6 +13,8 @@ Wrap your steps in a function and call the function
  Upload your python file to Canvas.
 """
 def evensAndOdds():
+    print("This program prompts you for a range of numbers and then outputs the even numbers and\
+the sum of the odd numbers.\n")
     #Prompt user to enter a starting number
     while True:
         start_num = int(input("Enter a starting number greater than zero (integer): "))
@@ -39,6 +41,7 @@ def evensAndOdds():
     for index, number in enumerate(numbers):
         if number%2 == 0:
             print("[" + str(number) + "] " +str(number))
+        #Create list of odd numbers based on the first odd number (rather than accumulating through looping)
         elif index == 1 or index ==2:
             odd_numbers = list(range(start_num, end_num + 1, 2))
 
@@ -49,3 +52,36 @@ def evensAndOdds():
     print("The sum of the odd numbers in your range equals: " + str(sum(odd_numbers)))
 
 evensAndOdds()
+
+
+"""
+Stretch Goal:
+
+Upgrade FizzBuzz with a for loop and submit as a separate file!
+Does your fizzbuzz print out the right values that you expect?
+"""
+def threesAndFives():
+    print("\n\nThis program prompts you for how many random numbers between 50 and 100 do you want to generate and\
+tests to see if they are divisible by three and five.\n")
+    #Prompt user for many random numbers that they want to generate
+    quantity = int(input("How many random numbers do you want to generate between 50 and 100? "))
+    #For loop will repeat for the number of times the user requested
+    for i in range(1, quantity+1):
+        #Generate a random number between 50 and 100 and store
+        import random
+        test_num = random.randint(50,100)
+        print("\nThe pseudo-randomly generated number is: " + str(test_num))
+        #Display 'fizzbuzz!' if test_num is divisible by both 3 and 5
+        if (test_num%3) == 0 and (test_num%5) == 0:
+            print("fizzbuzz!\n" + str(test_num) + " is evenly divisible by 3 & 5.")
+        #Display 'buzz!' if test_num is divisible by 5
+        elif (test_num%5) == 0:
+            print("buzz\n" + str(test_num) + " is evenly divisible by 5.")
+        #Display 'fizz!' if test_num is divisible by 3
+        elif (test_num%3) == 0:
+            print("fizz\n" + str(test_num) + " is evenly divisible by 3.")
+        #Otherwise display the value
+        else:
+            print(str(test_num) + " is not divisible by 3 or 5.")
+
+threesAndFives()
