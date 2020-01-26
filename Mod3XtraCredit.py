@@ -36,7 +36,7 @@ Pseudocode
 
   # if the sentry variable is bigger or equal to the guesses, break and console the loser
 """
-
+play_again = []
 def animal_guess():
     #Create a list of animals
     animals = ("ardvark", "bobcat", "cat", "dog", "elephant", "fox", "guerilla", "hyena", "ibis", "jaguar", "kangaroo",\
@@ -66,20 +66,24 @@ def animal_guess():
     #Show user the number of letter in the current animal name
     status = ["-" for letter in animal]
     print(' '.join('{}'.format(*i) for i in (status)))
+    #Start loop for guesses
     while index <= max_guesses:
         # get user input of a letter
         while valid == "no" or repeat == "yes":
             guess = input("What letter do you want to guess? ")
-            #guess = input("What letter do you want to guess? ")
+
+            # Store all guesses
             guesses = incorrect_guesses + correct_guesses
             guesses.sort()
+
             # validate that the user is not repeating a guess
             if guess in guesses:
                 print("\nPrevious guesses: ", ' '.join('{}'.format(*i) for i in (guesses)))
                 print("Please enter a letter that you have not guessed before.")
             else:
                 repeat = "no"
-            #validate that the user is entering a single letter
+
+            # validate that the user is entering a single letter
             if (not guess.isalpha()) or (len(str(guess))) != 1:
                 print("Please guess a single letter.")
             else:
@@ -89,17 +93,18 @@ def animal_guess():
         repeat = "yes"
 
         # check if the letter is in the animal name
-        # store the guessed letter in a list
+        # append the guessed letter to either the incorrect or correct guesses list
         if guess in animal:
             correct_guesses.append(guess)
             print("\nCorrect, you have", max_guesses - index, "guesses remaining.")
         else:
             incorrect_guesses.append(guess)
             print("\nInorrect, you have", max_guesses - index, "guesses remaining.")
+
         # increment the sentry variable
         index += 1
 
-        # print out the status of the game using a for loop (go though the letters in the animal name and\
+        # print out the status of the game using a for loop (go though the letters in the animal name and
         # see if they're in the guess letter list
         status =[]
         status = [letter if letter in correct_guesses else "-" for letter in animal]
@@ -124,6 +129,9 @@ def animal_guess():
             print("You lose!")
             index = 100
 
-#main
-if input("Want to guess an animal (y/n)? ") == "y":
-    animal_guess()
+def main():
+    if input("Want to guess an animal (y/n)? ") == "y":
+        animal_guess()
+
+main()
+
