@@ -70,7 +70,7 @@ def animal_guess():
     while index <= max_guesses:
         # get user input of a letter
         while valid == "no" or repeat == "yes":
-            guess = input("What letter do you want to guess? ")
+            guess = input("\nWhat letter do you want to guess? ")
 
             # Store all guesses
             guesses = incorrect_guesses + correct_guesses
@@ -122,15 +122,21 @@ def animal_guess():
         # if all of the letters in the animal are in the guess letter list, break and congratulate the user
         if "-" not in status:
             print("You win!")
-            index = 100
+            if input("Play again (y/n)? ") == "y":
+                continue
+            else:
+                index = 100
 
         # if the sentry variable is bigger or equal to the guesses, break and console the loser
         elif index > max_guesses:
             print("You lose!")
-            index = 100
+            if input("\nPlay again (y/n)? ") == "y":
+                continue
+            else:
+                index = 100
 
 def main():
-    if input("Want to guess an animal (y/n)? ") == "y":
+    if input("\nWant to guess an animal (y/n)? ") == "y":
         animal_guess()
 
 main()
