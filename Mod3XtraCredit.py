@@ -36,17 +36,25 @@ Pseudocode
 
   # if the sentry variable is bigger or equal to the guesses, break and console the loser
 """
+#Create a list of animals
+animals = ("ardvark", "bobcat", "cat", "dog", "elephant", "fox", "guerilla", "hyena", "ibis", "jaguar", "kangaroo",\
+           "lemur", "monkey", "nightingale", "opossum", "peacock", "rabbit", "squirrel", "tortoise", "vole", "wombat",\
+           "zebra")
+animals = list(animals)
 
-# make a variable with an animal name
-animal = list("elephant")
-
+# Randomly pick one of the animals from the list make a variable with an animal name
+number = len(animals)
+import random
+random_animal = random.randint(0, number-1)
+animal = animals[random_animal]
 # get the number of letters in the animal name (use len)
 length = len(animal)
-print(length)
 
-# set the number of guesses to be the animal name length plus 3
-max_guesses = length + 3
-
+# set the number of guesses to be the animal name with the most letters plus 3
+maxlength = max(len(i) for i in animals)
+max_guesses = maxlength + 3
+print(maxlength)
+print(max_guesses)
 # use a while loop with a sentry variable
 index = 0
 valid = "no"
@@ -54,6 +62,9 @@ repeat = "yes"
 correct_guesses = []
 incorrect_guesses = []
 
+#Show user the number of letter in the current animal name
+status = ["-" for letter in animal]
+print(' '.join('{}'.format(*i) for i in (status)))
 while index < max_guesses:
     # get user input of a letter
     while valid == "no" or repeat == "yes":
@@ -89,13 +100,16 @@ while index < max_guesses:
 
     # print out the status of the game using a for loop (go though the letters in the animal name and see if they're in the guess letter list
     status =[]
-    for letter in animal:
+    status = [letter if letter in correct_guesses else "-" for letter in animal]
+    """
+   # for letter in animal:
         if letter in correct_guesses:
             #print("Yes!")
             status.append(letter)
         else:
             #print("No!")
             status.append("-")
+            """
     print(' '.join('{}'.format(*i) for i in (status)))
 
     # if all of the letters in the animal are in the guess letter list, break and congratulate the user
