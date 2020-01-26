@@ -91,10 +91,10 @@ while index < max_guesses:
     # store the guessed letter in a list
     if guess in animal:
         correct_guesses.append(guess)
-        print("Correct: ", correct_guesses)
+        print("Correct, you have", max_guesses - index, "guesses remaining.")
     else:
         incorrect_guesses.append(guess)
-        print("Inorrect: ", incorrect_guesses)
+        print("Inorrect, you have", max_guesses - index, "guesses remaining.")
     # increment the sentry variable
     index += 1
 
@@ -117,6 +117,6 @@ while index < max_guesses:
         print("You win!")
         break
     # if the sentry variable is bigger or equal to the guesses, break and console the loser
-    if index > length:
+    if index > max_guesses:
         print("You lose!")
         break
