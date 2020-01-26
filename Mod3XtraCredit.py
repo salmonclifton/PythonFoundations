@@ -122,18 +122,12 @@ def animal_guess():
         # if all of the letters in the animal are in the guess letter list, break and congratulate the user
         if "-" not in status:
             print("You win!")
-            if input("Play again (y/n)? ") == "y":
-                continue
-            else:
-                index = 100
+            index = 100
 
         # if the sentry variable is bigger or equal to the guesses, break and console the loser
         elif index > max_guesses:
             print("You lose!")
-            if input("\nPlay again (y/n)? ") == "y":
-                continue
-            else:
-                index = 100
+            index = 100
 
 def main():
     if input("\nWant to guess an animal (y/n)? ") == "y":
