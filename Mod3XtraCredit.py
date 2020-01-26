@@ -53,8 +53,8 @@ length = len(animal)
 # set the number of guesses to be the animal name with the most letters plus 3
 maxlength = max(len(i) for i in animals)
 max_guesses = maxlength + 3
-print(maxlength)
-print(max_guesses)
+#print(maxlength)
+#print(max_guesses)
 # use a while loop with a sentry variable
 index = 0
 valid = "no"
