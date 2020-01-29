@@ -11,30 +11,19 @@ Use a while loop to get user input (guess a letter!) until they run out of guess
 Output the game status:  currently matching letters of the animal using a for loop
 The game ends when they run out of guesses or when they guess the animal
 
+Stretch goals:
 
-Pseudocode
+- Instead of guessing one animal, each game should get a new animal!
 
-# make a variable with an animal name
+Create a list of animals
+Pick one animal for each game
+- Clean the user input before checking it against the animal name.
 
-# get the number of letters in the animal name (use len)
+Make sure the user is guessing letters
+Make sure they're guessing one letter
+- Use the longest animal name as the number of guesses
 
-# set the number of guesses to be the animal name length plus 3
-
-# use a while loop with a sentry variable
-
-   # get user input of a letter
-
-  # check if the letter is in the animal name
-
-  # store the guessed letter in a list
-
-  # increment the sentry variable
-
-  # print out the status of the game using a for loop (go though the letters in the animal name and see if they're in the guess letter list
-
-  # if all of the letters in the animal are in the guess letter list, break and congratulate the user
-
-  # if the sentry variable is bigger or equal to the guesses, break and console the loser
+- Use a list comprehension to output the game status
 """
 play_again = []
 def animal_guess():
@@ -134,4 +123,3 @@ def main():
         animal_guess()
 
 main()
-
