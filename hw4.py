@@ -33,7 +33,7 @@ Your program should print out the response, as follows:
 # Dictionary creator function from two lists and returns the dictionary to main function
 def dict_creator():
     # Crete names list
-    names = ["Ma", "Mintwab", "Shierra", "Aaron", "Dave", "Dan", "Kim", "Brent", "Holly", "Mike", "Vanessa", "Jeff", "Ken", ]
+    names = ["Ma", "Mintwab", "Shierra", "Aaron", "Dave", "Dan", "Kim", "Brent", "Holly", "Mike", "Vanessa", "Jeff", "Ken"]
     # Create ages list
     ages = [35, 25, 32, 47, 56, 47, 48, 48, 25, 32, 27, 25, 35]
 
