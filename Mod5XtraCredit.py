@@ -36,9 +36,17 @@ Stretch goals below
 """
 #After your data structure is created, use a for loop to go over each job and calculate the average pay
 #Print a sentence for each job saying how many people work that job and what the average pay is.
+max_rate = 0
 for key, val in job_rates.items():
     average = sum(val)/len(val)
     if len(val) > 1:
-        print("There are {} {} positions and the average pay is ${:,.2f}".format(len(val), key, average))
+        print("There are {} {} employees and the average pay is ${:,.2f}".format(len(val), key, average))
     else:
-        print("There is {} {} position and the pay is ${:,.2f}".format(len(val), key, average))
+        print("There is {} {} employee and the pay is ${:,.2f}".format(len(val), key, average))
+    if average > max_rate:
+        highest_avg_rate = average
+        highest_paying = key
+
+#Calculate the highest paying job
+#print(job_rates.keys(job_rates.values()))
+print("\nThe highest paying position is the {} position which pays an average of ${:,.2f}.".format(highest_paying, highest_avg_rate))
