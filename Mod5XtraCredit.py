@@ -25,8 +25,9 @@ from collections import defaultdict
 job_rates = defaultdict(list)
 for dept, last, first, key, rate in reader:
     job_rates[key].append(rate)
-print(job_rates)
 
+#Write the dictionary to a file
 w = csv.writer(open("job_rates.csv", "w"))
 for key, val in job_rates.items():
     w.writerow([key, val])
+
