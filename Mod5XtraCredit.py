@@ -24,10 +24,21 @@ header = next(reader)
 from collections import defaultdict
 job_rates = defaultdict(list)
 for dept, last, first, key, rate in reader:
-    job_rates[key].append(rate)
+    job_rates[key].append(float(rate))
 
 #Write the dictionary to a file
 w = csv.writer(open("job_rates.csv", "w"))
 for key, val in job_rates.items():
     w.writerow([key, val])
 
+"""
+Stretch goals below
+"""
+#After your data structure is created, use a for loop to go over each job and calculate the average pay
+#Print a sentence for each job saying how many people work that job and what the average pay is.
+for key, val in job_rates.items():
+    average = sum(val)/len(val)
+    if len(val) > 1:
+        print("There are {} {} positions and the average pay is ${:,.2f}".format(len(val), key, average))
+    else:
+        print("There is {} {} position and the pay is ${:,.2f}".format(len(val), key, average))
