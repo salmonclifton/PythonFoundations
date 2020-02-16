@@ -20,10 +20,9 @@ Cost per person
 Stretch goals:
 
 Add an option to calculate the tip by person or by slice
-Update your pizza script to read in a file (txt or csv) of how many slices of pizza different people want (ex: Daniel, 3) and calculate the cost for each person individually
+Update your pizza script to read in a file (txt or csv) of how many slices of pizza different people want
+(ex: Daniel, 3) and calculate the cost for each person individually
 How many slices are leftover?"""
-
-
 
 #Get input from user for number of people and average slices per person
 def userInput():
@@ -45,14 +44,14 @@ def userInput():
        else:
            return num_people, num_slices
 
-#Calculate how many pizzas to order based on number of people and average number of slices
-#Calculate remainder number of slices
+#Function tp calculate how many pizzas to order based on number of people, average number of slices
+#and calculate remainder number of slices
 def pizzaCalc(people_count, average_slices):
     pizza_count = people_count * average_slices // total_slices
     extra_slices = people_count * average_slices % total_slices
     return pizza_count, extra_slices
 
-#Calculate total pizza cost
+#Function tp calculate total pizza cost
 def costCalc(pizza_count):
     cost = pizza_count * pizza_cost + delivery_fee
     tax = cost * tax_rate
@@ -60,14 +59,14 @@ def costCalc(pizza_count):
     total = cost + tax + tip
     return cost, tax, tip, total
 
-#Calculate cost per person
+#Function tp calculate cost per person
 def perPersonCost(cost, number):
     cost_each = cost / number
     return cost_each
 
-############
+####################################
 #main
-############
+####################################
 
 #Set static variables
 pizza_cost = 15.99
@@ -80,11 +79,30 @@ delivery_fee = 3.99
 people = 0
 slices_per = 0
 
+#Get user inputs
 people, slices_per = userInput()
-print("people = {}\nslices per person = {}".format(people, slices_per))
+
+#Calculate number of pizzas and left over slices
 pizza_total, remainder_slices = pizzaCalc(people, slices_per)
-print("number of pizzas = {}\nextra slices = {}".format(pizza_total, remainder_slices))
+
+#Calculate total cost
 total_cost, total_tax, total_tip, grand_total = costCalc(pizza_total)
-print("cost of pizzas = {}\ntax = {}\ntip = {}\ngrand total = {}".format(total_cost, total_tax, total_tip, grand_total))
+
+#Calculate cost per person
 per_person = perPersonCost(grand_total, people)
-print("Cost per person = {}".format(per_person))
+
+#Format currencies
+total_cost = format(total_cost, ",.2f")
+total_tax = format(total_tax, ",.2f")
+total_tip = format(total_tip, ",.2f")
+grand_total = format(grand_total, ",.2f")
+per_person = format(per_person, ",.2f")
+
+#Print final outputs
+print("\nPizza eatin' people = {}".format(people))
+print("Average slices per person = {}".format(slices_per))
+print("\nNumber of pizzas required to feed the masses = {}".format(pizza_total))
+print("Grand total = ${}".format(grand_total))
+print("Total cost per person including tax & tip = ${}\nBoy pizza is gotten expensive! Why don't we live large and\n"
+      "throw in a couple dozen doughnuts?!".format(per_person))
+print("Unclaimed remainder slices = {}".format(remainder_slices))
