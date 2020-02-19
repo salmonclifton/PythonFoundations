@@ -21,15 +21,14 @@ soup = BeautifulSoup(content, 'lxml')
 # tell soup to get the li gallerybox
 gb_lines = soup.find_all("li", "gallerybox")
 
-# crater name and crater diameter are inside a div that has the class 'gallerytext'
-# tell soup to get the div gallerytext from li gallerybox
-gt_lines = soup.find_all("div", "gallerytext")
+#For loop to get crater name from anchor tag and diameter from span tag within div galerytext within li gallerybox and
+#add each pair to the dictionary
 
 #Create dictionary by populating headers
 crater_dict = {"Crater":"Diameter"}
 
-#For loop to get crater name from anchor tag and diameter from span tag within div galerytext and
-#add each pair to the dictionary
+# crater name and crater diameter are inside a div that has the class 'gallerytext'
+# tell soup to get the div gallerytext from li gallerybox
 for line in gb_lines:
     div_tag = line.find("div", "gallerytext")
     if div_tag is not None:
