@@ -41,16 +41,15 @@ for line in gb_lines:
         # tell soup to get the span tag from div gallerytext
         diameter = div_tag.find("span")
         diameter = diameter.string
-        diameter = diameter.replace('(', '').replace(')', '')
+        diameter = diameter.replace('(','').replace(')','')
 
         # store name = diameter in a dictionary
-        crater_dict.update({crater: diameter})
+        crater_dict[crater] = diameter
 
 # print dictionary key/value to a file as two columns separated by a comma
 with open("crater_csv.csv", "w") as outfile:
     for crater, diameter in crater_dict.items():
-        crater = crater.replace(':', '')
-        outfile.writelines("{}, {}".format(crater, diameter))
+        outfile.writelines("{},{}".format(crater, diameter))
         outfile.write("\n")
 
 # Open newly created csv file and print
