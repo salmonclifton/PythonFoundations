@@ -76,7 +76,7 @@ def meaningful_format(tag, tag_lines):
     # for div tags it will assign a filename for file output, create a dict with the count
     # of the div tags. Returns dict and filename.
     elif tag == "div":
-        name = "div_count_csv.txt"  # ./
+        name = "div_count.txt"  # ./
         div_count_dict = {"Tag": "Count"}
         count = 0
 
