@@ -1,13 +1,36 @@
 #!/usr/bin/env python
+
+"""
+Program accepts user input for a url and tag that the user wants to scrape data from and save to a txt file.
+It is designed currently to only work with https://en.wikipedia.org/wiki/List_of_craters_on_the_Moon.
+The only tags that it will currently handle are li and div.
+Entering the li tag will scrape the crater name and crater diameter data.
+Entering the div tag will count the number of times the div tag occurs on the page.
+"""
+
 import csv
 import requests
 import lxml
 from bs4 import BeautifulSoup
 
+
+
 # get user input for a url and return it
 def get_user_input():
-    url = input("Enter the full url of the page you would like to scrape data from: ")
-    tag = input("Enter the tag from which you would like to scrape data from: ")
+    url = ""
+    tag = ""
+    # set valid inputs
+    valid_tags = ("li", "div")
+    valid_urls = ("https://en.wikipedia.org/wiki/List_of_craters_on_the_Moon")
+    print(url, tag)
+    while url != valid_urls:
+        url = input("Enter the full url of the page you would like to scrape data from: ")
+        if url != valid_urls:
+            print("Only allows https://en.wikipedia.org/wiki/List_of_craters_on_the_Moon in this version.\n")
+    while tag not in valid_tags:
+        tag = input("Enter the tag from which you would like to scrape data from: ")
+        if tag not in valid_tags:
+            print("Only li and div tags are handled in this release!\n")
     return url, tag
 
 # get a tag from a url and return the result set of tags
@@ -15,28 +38,20 @@ def pull_out_tag(url, tag):
     response = requests.get(url)
     content = response.content
     soup = BeautifulSoup(content, 'lxml')
+
+    # for li tag will return all li tags that have the class: gallerybox
     if tag == "li":
         results = soup.find_all(tag, "gallerybox")
         return results
+    # for div tag will return all div tags
     elif tag == "div":
         results = soup.find_all(tag)
         return results
 
 # format the tag information
-"""
-div - Generally used for spacing on the page and don't contain text or useful attributes. 
-Meaningful for div tags might be counting the number of divs that are on the page.
-li - Most of these have the `class=gallerybox` that makes them a container for the crater 
-information that we're looking for on the page, but they don't contain text or useful attributes.  
-Meaningful for li tags might be counting the number of divs that are on the page.
-a - Have a href attribute.  Some a tags on this page contain img tags and some contain text. 
-Meaningful for a tags might be displaying the href attribute and checking if it has text or title attribute.
-img - Have a src attribute and a width and height attribute.  Meaningful for img tags might be displaying 
-the src attribute or counting how many images have the same width or height.
-"""
-
-
 def meaningful_format(tag, tag_lines):
+    # for li tags it will assign a filename for file output, create a dict with the crater
+    # name and diameter. Returns dict and filename.
     if tag == "li":
         name = "crater_diam.txt" #./
         crater_diam_dict = {"Crater": "Diameter"}
@@ -58,7 +73,8 @@ def meaningful_format(tag, tag_lines):
                 # store name = diameter in a dictionary
                 crater_diam_dict[crater] = diameter
         return crater_diam_dict, name
-
+    # for div tags it will assign a filename for file output, create a dict with the count
+    # of the div tags. Returns dict and filename.
     elif tag == "div":
         name = "div_count_csv.txt"  # ./
         div_count_dict = {"Tag": "Count"}
@@ -83,12 +99,13 @@ def write_to_file(output, filename):
 
 if __name__ == "__main__":
     # for testing - in reality get user input
-    #url ="https://en.wikipedia.org/wiki/List_of_cities_in_Canada"
+    #url ="https://en.wikipedia.org/wiki/List_of_craters_on_the_Moon"
     #tag ="a"
 
     # real code
     # call get_user_input function to get the url and tag
     url, tag = get_user_input()
+
 
     # call the pull_out_tag function to use soup to find all of the tags
     contents = pull_out_tag(url, tag)
@@ -103,17 +120,3 @@ if __name__ == "__main__":
     text_file = open(name, "r")
     print(text_file.read())
     text_file.close()
-"""
-    tag_list = []
-    for tags in contents:
-        if tags is not None:
-            tags = tags.string
-            tag_list.append(tags)
-            print(tags)
-"""
-
-
-
-    # call the write to file function
-"""
-"""
