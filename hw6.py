@@ -49,14 +49,18 @@ def userInput():
 def pizzaCalc(people_count, average_slices):
     pizza_count = people_count * average_slices // total_slices
     extra_slices = people_count * average_slices % total_slices
+    if pizza_count < 1:
+        pizza_count = 1
+        extra_slices = 8 - (people_count * average_slices)
+
     return pizza_count, extra_slices
 
 #Function tp calculate total pizza cost
 def costCalc(pizza_count):
-    cost = pizza_count * pizza_cost + delivery_fee
+    cost = pizza_count * pizza_cost
     tax = cost * tax_rate
     tip = cost * tip_rate
-    total = cost + tax + tip
+    total = cost + tax + tip + delivery_fee
     return cost, tax, tip, total
 
 #Function tp calculate cost per person
