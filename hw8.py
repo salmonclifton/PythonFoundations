@@ -12,7 +12,7 @@ Prints an error message if someone tries to withdraw more money than what is cur
 """
 
 class BankAccount():
-    def __init__(self, name, balance = 10000):
+    def __init__(self, name, balance = 10000.00):
         self.name = name
         self.balance = balance
 
@@ -20,13 +20,23 @@ class BankAccount():
     def deposit(self, amount):
         self.balance = float(self.balance)
         self.balance = self.balance + amount
+        amount = format(amount, ",.2f")
+        formatted_balance = format(self.balance, ",.2f")
+        print("\nDeposit amount = ${}\nNew balance = ${}\n".format(amount, formatted_balance, ))
 
     def withdrawal(self, amount):
         self.balance = float(self.balance)
         if amount > float(self.balance):
-            print("Insufficient funds")
+            formatted_balance = format(self.balance, ",.2f")
+            print("\nInsufficient funds.\nCurrent balance = ${}\n".format(formatted_balance))
         else:
+            print(type(self.balance))
+            print(type(amount))
             self.balance = self.balance - amount
+            amount = format(amount, ",.2f")
+            formatted_balance = format(self.balance, ",.2f")
+            print("\nWithdrawal amount = ${}\nNew balance = ${}\n".format(amount, formatted_balance))
+
 
     def current_balance(self):
         formatted_balance = format(self.balance, ",.2f")
