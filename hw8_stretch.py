@@ -1,6 +1,25 @@
 #!/usr/bin/env python
 
+"""
+Stretch goals:
+
+Create a script that imports the Banking class and instantiates two users with balances.
+
+Update the script to have the users withdraw from their bank account
+
+Update the script to have the users deposit to their account
+
+Print the user's balance.
+
+Any user can enter a name and be gifted with a $10,00 bak account.
+The user can select from a menu to check their balance, make a deposit or make a withdrawal.
+
+"""
+# imports the class that was created for hw8
 import hw8
+
+# instantiates the user by name that is inputted
+# requires that only letters are inputted
 account_name = ""
 while (not account_name.isalpha()):
     account_name = input("\nEnter the name on your account: ")
@@ -10,6 +29,9 @@ print("Welcome, {}!\n\nYou get $10,000 and you get $10,000.\nIn fact everyone in
 
 account_name = hw8.BankAccount(name = account_name)
 
+# menu that prompts the user for what action they would like to take
+# validates that only integers 1 through 4 are entered
+# makes calls to to methods in the imported class to complete the requested actions
 while True:
     try:
         user_input = ""
