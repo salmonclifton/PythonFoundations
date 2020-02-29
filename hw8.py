@@ -23,13 +23,9 @@ class BankAccount():
 
     def withdrawal(self, amount):
         self.balance = float(self.balance)
-        print(type(amount))
-        print(type(self.balance))
         if amount > float(self.balance):
             print("Insufficient funds")
         else:
-            print(type(amount))
-            print(type(self.balance))
             self.balance = self.balance - amount
 
     def current_balance(self):

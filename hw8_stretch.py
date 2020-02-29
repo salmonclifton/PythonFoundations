@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import hw8
 
 account_name = input("Enter the name on your account: ")
@@ -26,8 +28,6 @@ while True:
             print("\nThanks for banking at Bank Oprah!")
             break
         else:
-            print("\nPlease. Work with me. It is not time to think outside of the box.")
-    except SomeException:
-        tb = sys.exc_info()[2]
-        raise OtherException(...).with_traceback(tb)
-    #except ValueError: print("\nPlease enter a valid number")
+            print("\nPlease. Work with me. It is not time to think outside of the box.\n")
+    except ValueError:
+        print("\nPlease enter a valid number")
