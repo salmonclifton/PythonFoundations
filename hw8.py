@@ -30,8 +30,6 @@ class BankAccount():
             formatted_balance = format(self.balance, ",.2f")
             print("\nInsufficient funds.\nCurrent balance = ${}\n".format(formatted_balance))
         else:
-            print(type(self.balance))
-            print(type(amount))
             self.balance = self.balance - amount
             amount = format(amount, ",.2f")
             formatted_balance = format(self.balance, ",.2f")
