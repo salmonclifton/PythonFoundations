@@ -25,7 +25,7 @@ while (not account_name.isalpha()):
     account_name = input("\nEnter the name on your account: ")
     if not account_name.isalpha():
         print("\nPlease enter only letters for your name.")
-print("Welcome, {}!\n\nYou get $10,000 and you get $10,000.\nIn fact everyone in the audience today gets $10,000!!\n".format(account_name))
+print("\nWelcome, {}!\n\nYou get $10,000 and you get $10,000.\nIn fact everyone in the audience today gets $10,000!!\n".format(account_name))
 
 account_name = hw8.BankAccount(name = account_name)
 
@@ -68,4 +68,4 @@ while True:
         print("\nThanks for banking at Bank Oprah!")
         break
     else:
-        print("\nPlease. Work with me. It is not time to think outside of the box.\n")
+        print("Work with me. It is not time to think outside of the box.\n")
