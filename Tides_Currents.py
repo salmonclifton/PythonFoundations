@@ -8,50 +8,42 @@ class Application(Frame):
     def __init__(self, master):
         """ Initialize the frame. """
         super(Application, self).__init__(master)
-        self.results_txt = Text(self, wrap = WORD)
-        self.settings_txt = Text(self, wrap = WORD)
+        self.location_txt = Text(self, wrap = WORD)
+        self.level_txt = Text(self, wrap = WORD)
         self.grid()
         self.create_widgets()
 
     def create_widgets(self):
         """ Create button, text, and entry widgets. """
-        # create instruction label
-        self.inst_lbl = Label(self, text = "Select location")
-        self.inst_lbl.grid(row = 0, column = 0, sticky = W)
-
-        # create instruction label
+        # create instruction label for radio buttons
         Label(self,
-              text="Select one:"
+              text="Location:"
               ).grid(row=1, column=0, sticky=W)
 
         # create variable for a single tidal observation station
         self.location = StringVar()
         self.location.set(None)
 
-        # create location radio buttons
-        Radiobutton(self,
-                    text="Location1",
-                    variable=self.location,
-                    value="Seattle",
-                    command=self.set_location
-                    ).grid(row=2, column=0, sticky=W)
+        # create body part radio buttons
+        locations = ["Seattle", "Bremerton", "Anacortes"]
+        row = 2
+        column = 0
+        for location in locations:
+                    Radiobutton(self,
+                                text = location,
+                                variable = self.location,
+                                value = location
+                                ).grid(row = row, column = column, sticky = W)
+                    row += 1
 
-        Radiobutton(self,
-                    text="Location2",
-                    variable=self.location,
-                    value="loc2",
-                    command=self.set_location
-                    ).grid(row=3, column=0, sticky=W)
+        # create a submit button
+        Button(self,
+               text = "Click for current conditions",
+               command = self.set_location
+               ).grid(row = 5, column = 0, sticky = W)
 
-        Radiobutton(self,
-                    text="Location 3",
-                    variable=self.location,
-                    value="loc3",
-                    command=self.set_location
-                    ).grid(row=4, column=0, sticky=W)
-
-        # create text widget to display message
-        self.results_txt.grid(row=5, column=0, columnspan=3, sticky=N+E+S+W)
+        self.location_txt = Text(self, height = 5, width = 50,  wrap = WORD)
+        self.location_txt.grid(row = 6, column = 0, sticky = W)
 
 
     def set_location(self):
@@ -68,19 +60,22 @@ class Application(Frame):
                 units="english",
                 time_zone="lst_ldt")
 
+        level_text = str(water_level.iloc[0]['predicted_wl'])
+        water_level = float(water_level.iloc[0]['predicted_wl'])
         #Update text area and display user's favorite movie type.
         message = "Displaying current conditions for "
         message += self.location.get()
+        message += ".\nWater level = "
+        message += level_text
 
-        print(type(water_level))
-        print(water_level)
-        """if level < 7:
-            print("Start walking!")"""
-
-        self.results_txt.delete(0.0, END)
-        self.results_txt.insert(0.0, message)
-
-
+        if water_level < 6.5:
+            message += "\nThe beach is yours!"
+        elif water_level < 7.0:
+            message += "\nGo if you dare but wear boots and hav an exit strategy!"
+        else:
+            message += "\nNo go, man. The tide is high."
+        self.location_txt.delete(0.0, END)
+        self.location_txt.insert(0.0, message)
 
 # main
 # create root window
