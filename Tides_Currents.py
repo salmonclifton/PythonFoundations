@@ -1,18 +1,24 @@
 #!/usr/bin/env python
 
 """
+This application retrieves NOAA tiadal data to report the current tidal height for the selected location via a gui.
+
 Criteria included:
 Contains at least one if/else statement
 Creates a class to contain the related functions
 Displays a graphical user interface
 
+The application takes advantage of the noaa_coops module that is available on GitHub.
 noaa_coops is a Python wrapper for the NOAA CO-OPS Tides & Currents Data and Metadata APIs.
+https://github.com/GClunies/noaa_coops/blob/master/README.md
 
 All data and metadata is handled using a Station class with methods and attributes for
 retrieving metadata, observed data, and predicted data.
 
-
+This application can be launched from a terminal window using the following command: python Tides_Currents.py
+Your environment must have the following modules installed: noaa_coops and tkinter.
 """
+
 import noaa_coops as nc
 from tkinter import *
 import datetime
