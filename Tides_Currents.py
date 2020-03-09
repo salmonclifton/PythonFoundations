@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-This application retrieves NOAA tiadal data to report the current tidal height for the selected location via a gui.
+This application retrieves NOAA tidal data to report the current tidal height for a selected location via a gui.
 
 Criteria included:
 Contains at least one if/else statement
