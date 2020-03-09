@@ -1,18 +1,34 @@
 #!/usr/bin/env python
-from pprint import pprint  # For pretty printing
+
+"""
+Criteria included:
+Contains at least one if/else statement
+Creates a class to contain the related functions
+Displays a graphical user interface
+
+noaa_coops is a Python wrapper for the NOAA CO-OPS Tides & Currents Data and Metadata APIs.
+
+All data and metadata is handled using a Station class with methods and attributes for
+retrieving metadata, observed data, and predicted data.
+
+
+"""
 import noaa_coops as nc
 from tkinter import *
-import pandas as pd
+import datetime
 
+# create a class to contain all of the functions
 class Application(Frame):
+    # init function to initialize the frame
     def __init__(self, master):
-        """ Initialize the frame. """
         super(Application, self).__init__(master)
-        self.location_txt = Text(self, wrap = WORD)
-        self.level_txt = Text(self, wrap = WORD)
         self.grid()
         self.create_widgets()
+        self.location_txt = Text(self, height=5, width=50, wrap = WORD)
+        self.level_txt = Text(self, wrap = WORD)
+        self.location_txt.grid(row=6, column=0, sticky=W)
 
+    # function that creates widgets for the gui
     def create_widgets(self):
         """ Create button, text, and entry widgets. """
         # create instruction label for radio buttons
@@ -24,8 +40,8 @@ class Application(Frame):
         self.location = StringVar()
         self.location.set(None)
 
-        # create body part radio buttons
-        locations = ["Seattle", "Bremerton", "Anacortes"]
+        # create location radio buttons based on the locations list
+        locations = ["Seattle", "Bremerton", "Tacoma"]
         row = 2
         column = 0
         for location in locations:
@@ -36,59 +52,66 @@ class Application(Frame):
                                 ).grid(row = row, column = column, sticky = W)
                     row += 1
 
-        # create a submit button
+        # create a submit button which calls the set_location function
         Button(self,
                text = "Click for current conditions",
                command = self.set_location
                ).grid(row = 5, column = 0, sticky = W)
 
-        self.location_txt = Text(self, height = 5, width = 50,  wrap = WORD)
-        self.location_txt.grid(row = 6, column = 0, sticky = W)
 
 
+    # function that gets the location value from the gui, gets the current water level from
+    # the server and outputs the go/no go message
     def set_location(self):
-        station = self.location.get()
-        if station == "Seattle":
-            seattle = nc.Station(9447130)
-            pprint(seattle.lat_lon['lat'])
-            pprint(seattle.lat_lon['lon'])
-            water_level = seattle.get_data(
-                begin_date="20200307 16:18",
-                end_date="20200307 16:18",
-                product="predictions",
-                datum="MLLW",
-                units="english",
-                time_zone="lst_ldt")
+        location = self.location.get()
+        if location == "Seattle":
+            station = nc.Station(9447130)
+            #pprint(seattle.lat_lon['lat'])
+            #pprint(seattle.lat_lon['lon'])
 
-        level_text = str(water_level.iloc[0]['predicted_wl'])
+        elif location == "Bremerton":
+            station = nc.Station(9445958)
+
+        elif location == "Tacoma":
+            station = nc.Station(9446484)
+
+        # gets current water level from the server for the selected location
+        currentDT = datetime.datetime.now()
+        current_time = currentDT.strftime("%Y%m%d %H:%M")
+        time_txt = str(currentDT.strftime("%a, %b %d, %Y %H:%M"))
+        water_level = station.get_data(
+            begin_date=current_time,
+            end_date=current_time,
+            product="predictions",
+            datum="MLLW",
+            units="english",
+            time_zone="lst_ldt")
+
+        # format the returned water level value so that it can be used in the output message
+        # as well as a value in the if statement
+        level_text = str(format(water_level.iloc[0]['predicted_wl'], ".1f"))
         water_level = float(water_level.iloc[0]['predicted_wl'])
-        #Update text area and display user's favorite movie type.
-        message = "Displaying current conditions for "
-        message += self.location.get()
-        message += ".\nWater level = "
-        message += level_text
+
+        # Update text area and display location, water level and and go/no go statement.
+        message = "{}\nDisplaying current conditions for {}.".format(time_txt, self.location.get())
+        #message += self.location.get()
+        message += "\nWater level = {} feet".format(level_text)
 
         if water_level < 6.5:
             message += "\nThe beach is yours!"
         elif water_level < 7.0:
-            message += "\nGo if you dare but wear boots and hav an exit strategy!"
+            message += "\nGo if you dare but wear boots and have an exit strategy!"
         else:
             message += "\nNo go, man. The tide is high."
         self.location_txt.delete(0.0, END)
         self.location_txt.insert(0.0, message)
 
-# main
+##### main #####
 # create root window
 root = Tk()
 root.title("Tide is High")
-root.geometry("600x400")
-
-
-
-#pprint(current)
-
-# create a frame int the window to hold other widgets
+root.geometry("400x400")
+# create a frame in the window to hold the widgets
 app = Application(root)
-#app.grid()
-
+# kick off the windows event loop
 root.mainloop()
