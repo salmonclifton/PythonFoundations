@@ -110,7 +110,7 @@ class Application(Frame):
 # create root window
 root = Tk()
 root.title("Tide is High")
-root.geometry("400x400")
+root.geometry("400x220")
 # create a frame in the window to hold the widgets
 app = Application(root)
 # kick off the windows event loop
