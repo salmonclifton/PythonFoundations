@@ -35,6 +35,7 @@ class Application(Frame):
         self.location_txt.grid(row=6, column=0, sticky=W)
 
     # function that creates widgets for the gui
+    # set_location function gets the location from the gui
     def create_widgets(self):
         """ Create button, text, and entry widgets. """
         # create instruction label for radio buttons
